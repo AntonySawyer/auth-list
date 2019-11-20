@@ -27,7 +27,7 @@ export default (props) => {
               <tr key={user.id}>
                 <th scope="row">
                   <label>
-                    <input type="checkbox" value={user.id} />
+                    <input type="checkbox" value={user.id} onChange={props.setIndeterminate} />
                   </label>
                 </th>
                 <td>{user.username}</td>

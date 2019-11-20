@@ -6,17 +6,25 @@ import './App.css';
 
 class App extends Component {
   state = {
-    users: []
+    users: [],
+    checkAllState: false
   }
 
   componentDidMount() {
-    fetch('/users')
+    fetch('/users') 
     .then(res => res.json())
     .then(users => this.setState({users}));
   }
 
   checkAll(e) {
+    this.setState({checkAllState: e.target.checked})
     document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = e.target.checked);
+  }
+
+  setIndeterminate() {
+    if (this.state.checkAllState) {
+      document.getElementById('mainCheckbox').indeterminate = true;
+    }
   }
 
   blockUser (ids) {
@@ -73,6 +81,7 @@ class App extends Component {
         <Table 
           users={this.state.users} 
           checkAll={this.checkAll.bind(this)}
+          setIndeterminate={this.setIndeterminate.bind(this)}
           />
       </div>
     )
